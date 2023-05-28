@@ -1,0 +1,22 @@
+body{
+    margin: 0;
+    background: #faf4de;
+
+}
+section{
+    height: 100vh;
+}
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+svg{
+    overflow: visible;
+    width: 100%;
+}
+#text-path{
+    fill:#333;
+    font-size: 2rem;
+    font-weight: 800;
+}

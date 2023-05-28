@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section></section>
+
+<section class="container">
+<!--    <svg  width="1993" height="211" viewBox="0 0 1993 211"  xmlns="http://www.w3.org/2000/svg">-->
+<!--        <path id="curve" d="M1 116.601C169.789 30.9796 645.225 -90.3257 1196.66 109.426C1748.1 309.178 1956.65 165.87 1992 69.2463" fill="transparent"/>-->
+<!--    <text>-->
+<!--        <textPath id="text-path" href="#curve" startOffset="5">-->
+<!--            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, voluptate.-->
+<!--        </textPath>-->
+<!--    </text>-->
+<!--    </svg>-->
+
+    <svg width="1993" height="685" viewBox="0 0 1993 685"  xmlns="http://www.w3.org/2000/svg">
+        <path id='curve' d="M0.5 257.5C47.6667 64 189.6 -206.9 380 257.5C570.4 721.9 866 674 990 592C885.167 381 798.5 26 1290.5 294C1905.5 629 749.5 217.5 1215 592C1587.4 891.6 1888.17 387.167 1992 97.5" fill="transparent"/>
+
+ <text>
+        <textPath id="text-path" href="#curve" startOffset="5">
+            I'm Kvitko Ernest, aspiring web developer
+        </textPath>
+    </text>
+</svg>
+
+    <!--    <svg width="1993" height="344" viewBox="0 0 1993 344" fill="none" xmlns="http://www.w3.org/2000/svg">-->
+<!--        <path d="M1 172C228.392 301.041 777.305 481.698 1153.82 172C1530.34 -137.698 1869.49 42.9594 1992 172" stroke="black"/>-->
+<!--    </svg>-->
+
+
+</section>
+<section></section>
+
+<script>
+    document.addEventListener('DOMContentLoaded',()=>{
+        const text=document.querySelector('#text-path')
+        const scrollSpeed=2.5;
+        const animationDirection='right'
+        const startPosition=-100;
+
+        function updateTextPosition(){
+            const container=document.querySelector('.container');
+            const containerRect = container.getBoundingClientRect()
+            const winHeight=window.innerHeight
+            if(containerRect.top <= winHeight && containerRect.bottom >=0){
+                const directionMultiplier = animationDirection === 'left'? 1:-1;
+                const startOffset = startPosition + ((containerRect.top-winHeight)/(containerRect.height+winHeight)) *100 *scrollSpeed * directionMultiplier;
+                text.setAttribute('startOffset',startOffset+'%')
+            }
+
+        }
+
+        const observer = new IntersectionObserver(
+            (entries)=>{
+                entries.forEach((entry)=>{
+                    if(entry.isIntersecting){
+                        updateTextPosition()
+                    }
+                })
+            },
+        {threshold: 0.1}
+        )
+        observer.observe(text)
+        window.addEventListener('scroll',updateTextPosition)
+    })
+</script>
+</body>
+</html>
